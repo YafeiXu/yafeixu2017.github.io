@@ -1,4 +1,4 @@
-Johnny Coder
+# Johnny Coder
 ============
 
 -------------------     ----------------------------
@@ -7,7 +7,7 @@ MyTown 1000                          @twitter_handle
 MyCountry                           1800 my-phone-nr
 -------------------     ----------------------------
 
-Education
+## Education
 ---------
 
 2010-2014 (expected)
@@ -22,7 +22,7 @@ Education
 
     *Minor: Awesomeology*
 
-Experience
+## Experience
 ----------
 
 **Your Most Recent Work Experience:**
@@ -40,7 +40,7 @@ links:
 
 Also with a short description.
 
-Technical Experience
+## Technical Experience
 --------------------
 
 My Cool Side Project
@@ -79,7 +79,7 @@ Programming Languages
 
 [ref]: https://github.com/githubuser/superlongprojectname
 
-Extra Section, Call it Whatever You Want
+## Extra Section, Call it Whatever You Want
 ----------------------------------------
 
 * Human Languages:
