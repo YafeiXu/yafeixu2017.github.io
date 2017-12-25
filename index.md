@@ -1,4 +1,4 @@
-[<u>java学习笔记</u>](../blob/master/javaNote.md)
+[<u>java学习笔记</u>](https://github.com/yafeixu2017/yafeixu2017.github.io/blob/master/javaNote.md)
 
 
 python机器学习笔记
