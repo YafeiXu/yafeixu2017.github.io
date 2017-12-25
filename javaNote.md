@@ -1,10 +1,8 @@
-<img src="https://www.codewars.com/users/Yafei%20Xu/badges/large" align="left">
-  
-  
 # JAVA学习笔记
 ## Java的一些语法注意
 ### 变量及其传递
-局部变量
++ 变量分为基本类型primitive和引用类型reference（使用new创建）
++ 局部变量需要显式赋值，类中的字段变量不需要。
 
 
 Basic useful feature list:
@@ -43,3 +41,5 @@ the inspiration to this, and some handy implementation hints, came.
  * [CodeMirror](http://codemirror.net/) for the awesome syntax-highlighted editor
  * [highlight.js](http://softwaremaniacs.org/soft/highlight/en/) for syntax highlighting in output code blocks
  * [js-deflate](https://github.com/dankogai/js-deflate) for gzipping of data to make it fit in URLs
+ 
+ <img src="https://www.codewars.com/users/Yafei%20Xu/badges/large" align="left">
