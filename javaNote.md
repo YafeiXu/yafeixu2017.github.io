@@ -1,3 +1,4 @@
+[JAVA@codewars](https://www.codewars.com/users/Yafei%20Xu/badges/large)
 # JAVA学习笔记
 ## Java的一些语法注意
 ### 变量及其传递
