@@ -1,8 +1,18 @@
-# JAVA学习笔记
-## Java的一些语法注意
-### 变量及其传递
-+ 变量分为基本类型primitive和引用类型reference（使用new创建）
-+ 局部变量需要显式赋值，类中的字段变量不需要。
+`# JAVA学习笔记
+## 第五章-Java的一些语法注意
+### 5.1-变量及其传递
++ 变量分为基本类型primitive和引用类型reference（使用new创建，包括class，interface，array）
++ 局部变量定义在method中需要显式赋值，字段变量定义在class中不需要显式赋值因为可以自动赋值。
++ 字段变量可以加修饰符public private static final，局部变量只能加final。
+
+### 5.2-多态和虚方法调用
++ overload是同名method但是通过不同参数调出不同activity。
++ override是子类对父类的method覆盖。被称为虚方法调用。
++ upcasting的例子
+````java
+Person p=new Student,
+
+```
 
 
 Basic useful feature list:
