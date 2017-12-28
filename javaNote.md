@@ -9,6 +9,7 @@ Person (String n, int a){\\构造方法的例子
 	age = a; 
 }
 ```
+
 + 默认构造方法不带参数，方法体为空。
 + 调用方法和字段值使用点`p.Sayhalo(); p.name;`。
 + 重载overload主要看参数的个数和参数的类型是否相同。通过重载可以实现多态。
@@ -18,6 +19,7 @@ Person (String n, int a){\\构造方法的例子
 + 一个类只能有一个父类superclass。
 + 继承的一个例子
 ```java
+
 class Student extends Person{
 	String school;\\相比于person增加一些字段
 	int score;
@@ -28,6 +30,7 @@ class Student extends Person{
 + 继承包括字段继承和方法继承（之后可以使用Override修改父类的方法，可以使用注释标记@Override）。
 + 重载本质上是增加新的方法，但是参数数量和参数类型可能不同。
 + 关键字super用于访问父类的字段和方法，比如`int a=super.age;`，调用父类方法`super.sayHalo()`。
+
 + super调用父类的构造方法。`super(name,age);`super调用构造方法必须放在第一句。
 + 子类与父类的转换
 ```java
@@ -44,6 +47,9 @@ Student s2 = (Student) s1;\\左大不用变，左小需要强制类型转换
 ### 4.4-访问控制符: public，protected，private及默认
 + 通常分为两种，访问修饰符（public和private）和其他修饰符即非访问控制符（abstract），这些东西可以用在字段和方法上。
 + 常见的访问控制符（权限修饰符）作用域，字段方法都可以加。
+
+
+
 |-----------           | 同一个类 | 同一个包 | 不同包的子类 | 不同包的非子类 |
 |-----------|----------|----------|--------------|----------------|
 | private   | YES      |          |              |                |
@@ -66,6 +72,9 @@ class Person2{
 
 ### 4.5-其他修饰符: static， final， abstract
 +非访问控制修饰符主要有三个，static，final，abstract。
+
+
+
 | 。       | 基本含义   | 修饰类         | 修饰成员（字段和方法） | 修饰局部变量（方法里面的变量） |
 |----------|------------|----------------|----------|--------------|
 | static   | 非实例     | 可以修饰内部类 | YES      |              |
