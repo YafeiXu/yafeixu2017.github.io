@@ -280,6 +280,302 @@ one.equals(anotherOne);\\ true
 + Math类有很多static方法。
 
 
+### 7.2 字符串和日期:String及StringBuffer类
++ Java两种字符创类，String类（创建后不许修改），StringBuffer StringBuilder类（创建后可以修改）。
++ string类常用方法有，concat, replace, replaceAll, substring, toLowerCase, toUpperCase, trim, toString, endsWith, startsWith, indexOf, lastIndexOf, equals, equalsIgnoreCase, charAt, length。
+```java
+StringBuffer sb = new StringBuffer();
+for(int i=0; i<1000; i++) sb.append("go");//这是更有效率的字符串连接
+```
+
++ String类有很多方法用于处理字符串问题。
++ StringBuffer类保存可修改的字符串，构造方法`StringBuffer()` ，一些方法包括append，insert，reverse，setCharAt，setLength。
++ 字符串分割类java.util.StringToken
+```java
+StringTokenizer st = new StringTokenizer("this is a dog", " " );
+StringTokenizer st = new StringTokenizer("123,456,789", "," );
+Double.parseDouble("456")// convert string to number
+```
+
+### 7.2-字符串和日期:日期类
++ Calender，`Calender.getInstance()` 获得日期。
++ `new Date()`
+```java
+Calendar c = Calendar.getInstance();
+//c.get(MONTH), c.get(DAY)
+Date d = new Date();
+SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+// sdf.format(d);
+LocalDateTime ldt = new LocalDateTime.now();// 当前时间
+LocalDateTime ldt = LocalDateTime.parse("2013/12/31 23:13:21");
+System.out.println(ldt.getYear());
+System.out.println(ldt.getMonth());
+System.out.println(ldt.getHour());
+System.out.println(ldt.getDayOfYear());
+System.out.println(ldt.getDayOfMonth());
+System.out.println(ldt.getDayOfWeek());
+```
+
+### 7.3-集合: Collection API及List
++ Collection包含两个子接口interface，List（允许重复元素，Vector，ArrayList，LinkedList）和Set（不允许重复元素，包括HashSet，TreeSet）和Queue。
++ Map接口是（key-value-pair）的集合。
++ List主要类包括Vector，ArrayList，LinkedList。
+```java
+List f = new LinkedList();//遍历数组的例子，使用增强型for语句最有效
+List f = new ArrayList();
+f.add("gogo")
+Iterator i = f.iterator();
+while(i.hasNext()){
+...
+}
+for( Object a : f){
+...
+}
+```
++ Iterator遍历器
+```java
+Iterator i= iterable.iterator();
+while(iterator.hasNext());
+doSomething(iterator.next());
+```
++ 增强型for语句用于遍历。
+```java
+for(Element e : list){
+...
+}
+```
+
+### 7.3 集合: Stack及Queue
++ Stack遵循后进先出 last in first out。包含三个方法，push上栈，pop取出元素，empty判断是否为空。
+```java
+Stack stk = new Stack();
+stk.push("go");// add element to stack
+stk.empty();// return boolean value
+stk.pop();// retrive element
+```
++ Queue遵循先进先出 first in first out，重要实现是LinkedList。可抛出异常的方法包括，add(), remove(), element()，返回元素的方法包括，offer()，poll()，peek()。
+```java
+Queue q = new LinkedList();
+```
++ 常用数据对象，ArrayList, LinkedList, HashMap, Iterator。
+
+
+### 7.3 集合: Set及Map
++ Set的两个类HashSet, TreeSet, Set中对象不同，类似于数学中的集合。
+```java
+Set s = new HashSet();
+s.add("allen");
+s.add("bill");
+s.add("cathy");
+System.out.println(s.contains("allen"));// true
+for(String elmt : s){// 遍历s中元素
+	System.out.println(elmt);
+}
+```
++ 哈希数是把一个对象用一个字符串表出，称为哈希值。
++ Map是键-值对的collection，类似于python中的dictionary。
++ Map包括HashMap和TreeMap
+```java
+Map m = new TreeMap();
+m.put("allen","1");
+m.put("bill","2");
+System.out.println(m.get("bill"));
+// m.keySet()所有key的集合
+// m.values()所有value的集合
+// m.entrySet()所有项term的集合
+```
+
+### 7.4-排序与查找
++ Array类中的元素的排序。
+```java
+String[] s = randStrings(4, 10);//AASX, SSDR, SDAR,...
+Arrays.sort(s);
+int loc = Arrays.binarySearch(s, s[2]);//在s中查找第二个元素的位置
+```
+
+```java
+List school = new ArrayList();
+school.add("a","b");
+Collections.sort(school, new PersonComparator());
+Collections.sort(school, (p1,p2)->p1.age-p2.age);
+```
+### 7.5-泛型:(***)自定义泛型(*较高要求)
++ 泛型针对不同的类有相同的处理方法。`ArrayList<String> al=new ArrayList<String>();`
++ 泛型针对类尖括号写在类的后面，针对方法写在方法前面。
+
+### 7.6-常用算法:遍试、迭代
++ 穷举算法，exhaust algorithm主要使用for循环实现。
++ 迭代算法，`while(){f(x)}`
++ 递归算法，`f(n){f(n-1);}`
+
+
+## 第八章-线程程序设计
+### 8.1-线程创建
++ 一个程序的执行称为进程。一个程序（进程）中可以有多个任务，可以并发运行。一个进程可以包括多个线程。
++ 程序中单个顺序的流控制称为线程。
++ 线程创建的两种方法。
+```java
+//调用线程的第一种方法使用继承Tread类
+class MyThread extends Thread{
+	public void run(){
+		for(int i=0; i<100; i++){
+			System.out.println(" "+i);
+		}
+	}
+}
+//调用线程的第二种方法使用Runnable接口++++重点使用++++
+class MyTask implements Runnable{
+	public void run(){
+	...
+	}
+}
+
+Thread t = new Thread(MyTask);
+t.start();
+
+//使用匿名类实现Runnable
+new Thread(){
+	public void run(){
+		for(int i=0; i<100; i++){
+			System.out.println(" "+i);
+		}
+	}
+}.start();
+
+//使用lambda表达式
+new Thread(()->{...}).start();
+
+//使用休眠，暂停函数
+Thread.sleep(mini second);
+```
+
+### 8.2-线程的控制
++ 线程的暂停`try{Thread.sleep(1000);}catch(InterruptedException e){...}`
+
+### 8.3-线程的同步: 线程的同步控制
+
+### 8.4-并发API
++ java.util.concurrent包及其子包，单变量，集合，timer，线程池。
++ java.util.Timer, javax.swing.Timer
+```java
+Timer t = new Timer("display");
+Timertask task = new MyTask();
+t.schedule(task, 1000, 1000);//每隔一秒钟执行一次task
+```
++图形界面的更新需要SwingUtilites.invokeLater
+`SwingUtilites.invokeLater(()->{draw();});`
+
+
+### 8.5-流式操作及并行流
++ 流的最大作用是做并行计算
+```java
+List<Integer> nums = Arrays.asList(1,2,3);
+nums.stream()
+	.forEach(x->{System.out.println(x);});
+```
+
+```java
+Arrays.stream(a)//数组进行流化
+	.filter(i->i>20)
+	.map(i->i*i)
+	.sorted()
+	.distinct()
+	.limit(10)
+	.max();
+
+Collection People=...//对集合进行流化
+people.stream()
+	.filter(p->p.age>20)
+	.sorted(Comparator.comparing(Person::getName))
+	.limit(5)
+	.mapToDouble(p->p.score)
+	.average();
+```
++ 流的中间操作包括filter, sorted, limit, map
++ 流的末端操作包括max, min, count, forEach, findAny
++ 数组创建流Arrays.stream(arr), list.stream()
++ 流的**并行计算**.parallelStream()
+```java
+List<Integer> a = Arrays.asList(1,2,5,7,3);
+System.out.println(
+a.parallelStream()//流做并行计算的例子
+	.mapToInt(i->(int)i)
+	.filter(i->i>2)
+	.map(i->i*i)
+	.sorted()
+	.distinct()
+	.limit(10)
+	.max()
+);
+```
+
+
+## 第九章 输入与输出
++ java.nio包
++ 输入的起点，文件，内存，网络。
++ 输出，文件，内存，网络，终端。
++ 字节流 InputStream类read()方法。OutputStream类write()方法。
++ Reader类Writer类，字符流
++ 节点流FileInputStream, ByteArrayInputStream与处理流Filter, BufferedReader
++ java.nio.file.Files中的readAllLines()方法
+```java
+String filePath = "d:\\javaExample\\ReadAllLines.java"
+List<String> lines = Files.readAllLines(
+	Paths.get(filePath),
+	Charset.forName("utf-8")//字符编码设定
+);
+```
+
++ 对象的读写Object(Data)Input(Output)Stream
+
+### 9.2-文件及目录
++ File类
+```java
+File f;
+File f = new File("Test.java");
+File f = new File("E:\\ex\\","Test.java");
+```
+
+### 9.3-正则表达式
++ 用于处理字符串，匹配字符串。验证，分割，查找，替换。
++  字符{数量}位置`[0-9]{2,4}\b`
+```java
+. 一个字符的通配符，
+[] 字符集
+[^] 和字符集合之外的任意字符匹配
+^ 起始位置，定位到一行的起始处并且向后匹配
+$ 结束位置，定位到一行末尾并向前匹配
+\b 单词边界
+\B 非单词边界
+() 按照表达式分组
+| 逻辑或
+\ 匹配反斜线之后的字符，转义符号
+* 匹配表达式首项字符零或多个副本
++ 匹配一个或者多个
+? 匹配零或一个
+n 匹配表达式首项n个副本
+\d 表示数字 相当于[0-9]
+\D 表示非数字[^0-9]
+\s 表示空白符
+\S 表示非空白符
+\w 表示字母加数字字符[a-zA-Z_0-9]
+\W 表示非字母加数字字符[^\w]
+```
+
++ `\b(href)=('[^']+')` 匹配网址
+
+### 9.3 正则表达式:正则表达式的基本应用
++ java.util.regex包的两个类Pattern, Matcher。
+```java
+Pattern p = Pattern.compile("[,\\s]+");\\使用正则表达式分割字符串
+String[] result = p.split("one, two, three");
+
+String p = "^[^@]+@[\\w]+(\\.[\\w]+)*$";\\匹配电子邮件地址
+String email="dstang2000@263.net";
+boolean ok=Pattern.matches(pattern, email);
+```
+
++ Matcher类，替换时`$0表示整个匹配项,$1表示分组`
 
 
 
