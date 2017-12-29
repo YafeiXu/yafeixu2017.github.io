@@ -9,7 +9,6 @@ Person (String n, int a){\\构造方法的例子
 	age = a; 
 }
 ```
-
 + 默认构造方法不带参数，方法体为空。
 + 调用方法和字段值使用点`p.Sayhalo(); p.name;`。
 + 重载overload主要看参数的个数和参数的类型是否相同。通过重载可以实现多态。
@@ -19,7 +18,6 @@ Person (String n, int a){\\构造方法的例子
 + 一个类只能有一个父类superclass。
 + 继承的一个例子
 ```java
-
 class Student extends Person{
 	String school;\\相比于person增加一些字段
 	int score;
@@ -30,7 +28,6 @@ class Student extends Person{
 + 继承包括字段继承和方法继承（之后可以使用Override修改父类的方法，可以使用注释标记@Override）。
 + 重载本质上是增加新的方法，但是参数数量和参数类型可能不同。
 + 关键字super用于访问父类的字段和方法，比如`int a=super.age;`，调用父类方法`super.sayHalo()`。
-
 + super调用父类的构造方法。`super(name,age);`super调用构造方法必须放在第一句。
 + 子类与父类的转换
 ```java
@@ -47,9 +44,6 @@ Student s2 = (Student) s1;\\左大不用变，左小需要强制类型转换
 ### 4.4-访问控制符: public，protected，private及默认
 + 通常分为两种，访问修饰符（public和private）和其他修饰符即非访问控制符（abstract），这些东西可以用在字段和方法上。
 + 常见的访问控制符（权限修饰符）作用域，字段方法都可以加。
-
-
-
 |-----------           | 同一个类 | 同一个包 | 不同包的子类 | 不同包的非子类 |
 |-----------|----------|----------|--------------|----------------|
 | private   | YES      |          |              |                |
@@ -72,9 +66,6 @@ class Person2{
 
 ### 4.5-其他修饰符: static， final， abstract
 +非访问控制修饰符主要有三个，static，final，abstract。
-
-
-
 | 。       | 基本含义   | 修饰类         | 修饰成员（字段和方法） | 修饰局部变量（方法里面的变量） |
 |----------|------------|----------------|----------|--------------|
 | static   | 非实例     | 可以修饰内部类 | YES      |              |
@@ -585,6 +576,127 @@ boolean ok=Pattern.matches(pattern, email);
 ```
 
 + Matcher类，替换时`$0表示整个匹配项,$1表示分组`
+
+
+## 第十章 图形用户界面设计
+### 10.1-组件: 图形用户界面GUI组件及分类
++ 常用的两个包，AWT（java.awt）和swing（javax.swing）
++ java.awt组件有Frame, Button, Label, TextField, TextArea, Panel
++ javax.swing组件有JFrame, JButton, JLabel, JTextField, JTextArea, JPanel
++ java.awt组件包括容器（Panel（非顶层）, Window（顶层）(Frame, Dialog)）和非容器两类。
++ javax.swing组件，顶层JFrame，JDialog，JApplet，容器都有add()方法用来加入子组件。
+
+### 10.2 实现界面的三步曲: 组件、布局、事件
++ 三部曲，创建组件component，指定布局layout，响应事件event。
++ eclipse中右键项目new-others-windows builder-swing designer-JFrame添加绝对布局的按钮，右键按钮add event handler添加时间代码块。
++ JFrame关闭`setCloseDefaultOperation(EXIT_ON_CLOSE);`
+```java
+JButton b1 = new JButton("button1");
+JTextField tf = new JTextField(20);
+getContentPanel().setLayout(new FlowLayout());
+getContentPanel().add(b1);
+getContentPanel().add(tf);
+setSize(400,300);
+setCloseDefaultOperation(EXIT_ON_CLOSE);
+
+```
+### 10.3-布局
++ 三种常用布局，FlowLayout（从左到右依次布置控件）, BorderLayout（最多放5个对象）, GridLayout（类似电话键盘）
+
+### 10.4-事件处理:事件及事件监听器
++ 事件监听器是一个接口，比如MouseMotionListener有一些方法比如拖拽，点击。
++ 事件源getSource()与时间具体情况getX(), getY(), getKeyChar()
++ 事件分类，java.awt.event, javax.swing.event
++ 事件适配器Adapter简化实现Listener
++ 实现监听器的两种方法，`implements xxxListener` 或者 `extends xxxAdapter`（用于override重要方法）或者使用匿名类，以及lambda方法。
++ 一个对象可以注册多个监听器，多个对象可以注册同一个监听器（用getSource()注明所选择的对象）
++ listener主要的作用就是保持循环等待比如点击按钮等。
++ 如果设计需要在线程中更新界面则需要使用SwingUtilities.invokeLater()方法。
+```java
+SwingUtilities.invokeLater(()->{lbl.setText("go")});
+
+```
+
+### 10.6 Applet
++ 浏览器端运行的java程序。
++ flash和HTML5来代替java applet。
+
+## 第十一章 网络，多媒体，数据库编程
+### 11.1 网络编程:网络信息获取
+```java
+URL url = new URL("http://www.163.com");
+InputStream stream = url.openStream();
+```
+
++ 使用库Apache, httpclient。
++ 使用第三方库方法，eclipse-右键项目-build path-add external archives
++ 使用httpclient库的一个例子
+```java
+str = Request.Get("http://www.163.com")
+		.execute().returnContent().asString();
+```
+### 11.1 网络编程:使用Socket编程
++ Socket类, `Socket s = new Socket("机器名或者IP地址", 端口号)` 客户端和服务端连接。
++ ServerSocket类，使得服务端和客户端连接。
+
+### 11.2 多媒体编程:绘图及图像
++ 绘图类包括Graphics和子类Graphics2D
++ 第一种方法使用控件的getGraphics()方法。第二种方法使用awt里面的Canvas和Swing里面的JComponent，即override Canvas的`paint(Graphics g) ` ，或者JComponent里面的`paintComponent(Graphics g)`
++ 显示图像
+
+
+### 11.3 数据库编程
++ 关系型数据库包括表table，记录record，字段field。
++ 字段类型包括char, int, smallint, bit, float, datetime, image。
++ 主键primary key。
++ db viewer, db quantum 用于查看数据库。
++ 使用SQL语句查询记录。几个基本的SQL语句
+```sql
+SELECT * FROM [publisher]
+SELECT age, sex, salary + bonus
+FROM employee
+WHERE depart='销售部' and title='经理'
+SELECT avg(salary) FROM employee 
+```
++ 表格的基本操作，增删改查四种最基本操作
+```sql
+插入数据
+INSERT INTO [employee](name, age) VALUES ('Liming', 18)
+更新数据
+UPDATE [employee] SET salary = salary + 50
+删除数据
+DELETE FROM [employee] WHERE age>80
+创建和删除表
+CREATE TABLE [employee] (id integer, name char(10), age integer)
+DROP TABLE [employee]
+  
+```
+
+### 11.3 数据库编程:JDBC对数据库的访问
++ 每个数据库都有一个JDBC驱动程序，添加驱动程序eclipse-右键工程-properties-java build path-libraries-add external jars
++ 三个JDBC重要类，Connection, Statement, ResultSet（可以使用next()遍历）
+```java
+//加载驱动程序
+Class.forName("org.sqlite.JDBC");
+//得到与数据库连接
+String connString = "jdbc:sqlite:d:/test3.db";
+Connection conn	= DriverManager.getConnection(connString);
+//创建语句
+stmt = con.creatStatement();
+//执行非查询
+stmt.executeUpdate("delete from DemoTable");
+//查询数据库
+rs=stmt.executeQuery("SELECT * from DemoTable ORDER BY test_id");
+
+  
+```
+
+
+
+
+
+
+
 
 
 
